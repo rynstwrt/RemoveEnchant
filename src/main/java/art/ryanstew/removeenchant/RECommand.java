@@ -14,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 public class RECommand implements CommandExecutor, TabExecutor
@@ -23,15 +22,13 @@ public class RECommand implements CommandExecutor, TabExecutor
 
     private final RemoveEnchant plugin;
     private final List<String> helpMessageLines;
-    private final ConfigHandler configHandler;
     private final Registry<Enchantment> enchantmentRegistry = Registry.ENCHANTMENT;
 
 
-    public RECommand(RemoveEnchant plugin, List<String> helpMessageLines, ConfigHandler configHandler)
+    public RECommand(RemoveEnchant plugin, List<String> helpMessageLines)
     {
         this.plugin = plugin;
         this.helpMessageLines = helpMessageLines;
-        this.configHandler = configHandler;
     }
 
 
@@ -71,9 +68,8 @@ public class RECommand implements CommandExecutor, TabExecutor
                 return true;
             }
 
-            boolean successful = configHandler.loadConfig();
-            String message = successful ? "&aSuccessfully reloaded the config!" : "&cFailed to load config!";
-            plugin.sendFormattedMessage(sender, message, true);
+            plugin.reloadConfig();
+            plugin.sendFormattedMessage(sender, "&aSuccessfully reloaded the config!", true);
             return true;
         }
 
@@ -93,13 +89,12 @@ public class RECommand implements CommandExecutor, TabExecutor
             return true;
         }
 
-        if (!item.getEnchantments().containsKey(found))
+        if (item.removeEnchantment(found) == 0)
         {
             plugin.sendFormattedMessage(player, "&cYour held item doesn't have that enchantment!", true);
             return true;
         }
 
-        item.removeEnchantment(found);
         String enchantName = found.key().asMinimalString().replaceAll("_", " ");
         plugin.sendFormattedMessage(player, String.format("&aSuccessfully removed %s from your held item!", enchantName), true);
         return true;
@@ -111,19 +106,18 @@ public class RECommand implements CommandExecutor, TabExecutor
     {
         if (!(sender instanceof Player player))
         {
-            List<String> argumentList = new ArrayList<>();
-            if (args.length == 1) argumentList.add("reload");
-            return argumentList;
+            return List.of("reload");
         }
 
         if (args.length == 1)
         {
-            ItemStack item = player.getInventory().getItemInMainHand();
-            Set<Enchantment> enchantments = item.getEnchantments().keySet();
-
-            List<String> currentEnchantmentNames = new ArrayList<>();
-            enchantments.forEach(enchantment -> currentEnchantmentNames.add(enchantment.key().asMinimalString()));
-            return currentEnchantmentNames;
+            return player.getInventory()
+                    .getItemInMainHand()
+                    .getEnchantments()
+                    .keySet()
+                    .stream()
+                    .map(enchantment -> enchantment.key().asMinimalString())
+                    .toList();
         }
 
         return new ArrayList<>();
