@@ -1,0 +1,4 @@
+name: RemoveEnchant
+version: '${version}'
+main: art.ryanstew.removeenchant.RemoveEnchan
+api-version: '1.20'
