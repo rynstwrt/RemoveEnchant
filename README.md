@@ -23,18 +23,17 @@ Web: www.ilikefoxes.com
 - Configurable plugin message prefix.
 - Enchantment tab-completion.
 
-## Commands
-### Main: 
-- `/removeenchant`
-### Aliases:
-- `/removeenchantment`
-- `/re`
+## Command Aliases:
+- The main command is `/removeenchant`
+- It has two aliases:
+  - `/re`
+  - `/removeenchantment`
 
-## Commands
+## Commands:
 - `/re help` - Displays the help page.
 - `/re <enchantment name>` - Removes the given enchantment from your held item.
 - `/re reload` - Reloads the plugin.
 
-## Permissions
+## Permissions:
 - `removeenchant.use` - Permission to use any /removeenchant command.
 - `removeenchant.reload` - Permission to reload the plugin's config.
