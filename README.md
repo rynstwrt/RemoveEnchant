@@ -4,6 +4,11 @@
 
 ![RemoveEnchant logo](./assets/resourceicon.png)
 
+## This plugin was created for FoxCraft!
+IP: `play.ilikefoxes.com`
+
+Web: www.ilikefoxes.com
+
 ## Screenshots:
 #### Help page:
 ![The help page](./assets/helppage.png)
