@@ -1,4 +1,13 @@
 name: RemoveEnchant
 version: '${version}'
-main: art.ryanstew.removeenchant.RemoveEnchan
+main: art.ryanstew.removeenchant.RemoveEnchant
 api-version: '1.20'
+commands:
+  removeenchantment:
+    description: "Remove a chosen enchantment from your item!"
+    usage: "/re <enchantment name>"
+    permission: removeenchantment.use
+permissions:
+  removeenchantment.use:
+    description: "Permission to use /re"
+    default: op
