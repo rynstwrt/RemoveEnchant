@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
+
 public final class RemoveEnchant extends JavaPlugin
 {
     private static final Logger LOGGER = Logger.getLogger("Minecraft");
@@ -20,16 +21,18 @@ public final class RemoveEnchant extends JavaPlugin
     @Override
     public void onEnable()
     {
-        helpMessageLines.add("&6RemoveEnchant&7:");
-        helpMessageLines.add("&7- &a/re <enchantment>");
+        helpMessageLines.add("\n");
+        helpMessageLines.add("&7[&d&l&kx&dRemoveEnchant&d&l&kx&7]:");
+        helpMessageLines.add("&7- &a/re <enchantment> &7- Removes the given enchantment.");
+        helpMessageLines.add("&7- &a/re help &7- Shows this page.");
 
         configHandler = new ConfigHandler(this);
 
-        boolean success = configHandler.loadConfig();
-        if (success) LOGGER.info("Successfully loaded RemoveEnchant's config!");
+        boolean loadSuccess = configHandler.loadConfig();
+        if (loadSuccess) LOGGER.info("Successfully loaded RemoveEnchant's config!");
         else LOGGER.warning("Error loading RemoveEnchant's config!");
 
-        Objects.requireNonNull(getCommand("removeenchantment"))
+        Objects.requireNonNull(getCommand("removeenchant"))
                 .setExecutor(new RECommand(this, helpMessageLines, configHandler));
     }
 

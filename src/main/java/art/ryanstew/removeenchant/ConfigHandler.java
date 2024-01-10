@@ -12,6 +12,7 @@ public class ConfigHandler
     private static final String CONFIG_FILE_NAME = "config.yml";
 
     private final RemoveEnchant plugin;
+
     private String prefix;
 
 
