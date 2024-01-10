@@ -1,5 +1,7 @@
 # RemoveEnchant
 ### A Spigot plugin that allows you to remove specific enchantments from items!
+[RemoveEnchant's Page on SpigotMC.org](https://www.spigotmc.org/resources/removeenchant.114428/)
+
 ![RemoveEnchant logo](./assets/resourceicon.png)
 
 ## Screenshots:
