@@ -1,2 +1,21 @@
-# The prefix RemoveEnchant's commands should use
+# The prefix RemoveEnchant's commands should use.
 prefix: "&7[&dRemoveEnchant&7]&r &8> &r"
+
+
+# The help message send when /re or /re help is ran.
+helpMessage:
+  - "&7[&d&l&kx&dRemoveEnchant&d&l&kx&7]:"
+  - "&7- &a/re <enchantment> &7- Removes the given enchantment."
+  - "&7- &a/re help &7- Shows this page."
+
+
+# The last line of the help message if the user has
+# the removeenchant.reload permission.
+helpMessageReloadLine: "&7- &a/re reload &7- Reloads the config."
+
+
+# Whether the help message should be sent
+# with newlines above and below it.
+addHelpMessageSpacing: true
+
+

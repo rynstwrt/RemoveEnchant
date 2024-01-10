@@ -13,14 +13,18 @@ Web: www.ilikefoxes.com
 #### Help page:
 ![The help page](./assets/helppage.png)
 
-#### The command to remove silk touch from your held item.
+#### The command to remove silk touch from your held item:
 ![The command](./assets/command.png)
 
-#### Result after typing /re silk touch
+#### Result after typing /re silk touch:
 ![Command removal result](./assets/removal.png)
+
+#### Config file:
+![Config file](./assets/config.png)
 
 ## Features:
 - Configurable plugin message prefix.
+- Configurable plugin help message.
 - Enchantment tab-completion.
 
 ## Command Aliases:

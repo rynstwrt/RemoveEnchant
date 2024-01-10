@@ -21,32 +21,28 @@ public class RECommand implements CommandExecutor, TabExecutor
     private static final String RELOAD_PERMISSION = "removeenchant.reload";
 
     private final RemoveEnchant plugin;
-    private final List<String> helpMessageLines;
     private final Registry<Enchantment> enchantmentRegistry = Registry.ENCHANTMENT;
 
 
-    public RECommand(RemoveEnchant plugin, List<String> helpMessageLines)
+    public RECommand(RemoveEnchant plugin)
     {
         this.plugin = plugin;
-        this.helpMessageLines = helpMessageLines;
-    }
-
-
-    private List<String> cloneList(List<String> list)
-    {
-        List<String> clone = new ArrayList<>(list.size());
-        clone.addAll(list);
-        return clone;
     }
 
 
     private void sendHelpMessage(CommandSender sender)
     {
-        List<String> lines = cloneList(helpMessageLines);
-        if (sender.hasPermission(RELOAD_PERMISSION)) lines.add("&7- &a/re reload &7- Reloads RemoveEnchant's config.\n&r");
-        else lines.add("\n&r");
+        List<String> helpMessageLines = plugin.getConfig().getStringList("helpMessage");
+        if (sender.hasPermission(RELOAD_PERMISSION))
+            helpMessageLines.add(plugin.getConfig().getString("helpMessageReloadLine"));
 
-        String message = String.join("\n", lines);
+        if (plugin.getConfig().getBoolean("addHelpMessageSpacing"))
+        {
+            helpMessageLines.add(0, "\n");
+            helpMessageLines.add("\n&r");
+        }
+
+        String message = String.join("\n", helpMessageLines);
         plugin.sendFormattedMessage(sender, message, false);
     }
 
@@ -105,12 +101,9 @@ public class RECommand implements CommandExecutor, TabExecutor
     public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] args)
     {
         if (!(sender instanceof Player player))
-        {
             return List.of("reload");
-        }
 
         if (args.length == 1)
-        {
             return player.getInventory()
                     .getItemInMainHand()
                     .getEnchantments()
@@ -118,7 +111,6 @@ public class RECommand implements CommandExecutor, TabExecutor
                     .stream()
                     .map(enchantment -> enchantment.key().asMinimalString())
                     .toList();
-        }
 
         return new ArrayList<>();
     }
